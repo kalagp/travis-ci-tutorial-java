@@ -8,11 +8,9 @@ pipeline {
         jdk 'linux-jdk1.8.0_102'
     }
     stages {
-        stage('SonarQube analysis') {
-            steps{
-                withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar'
-                }
+        stage('Verify') {
+            steps {
+                sh "mvn clean compile"
             }
         }
     }
