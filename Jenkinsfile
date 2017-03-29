@@ -7,9 +7,14 @@ pipeline {
         jdk 'linux-jdk1.8.0_102'
     }
     stages {
-        stage('Verify') {
+        stage('Compile') {
             steps {
                 sh "mvn compile"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "mvn test"
             }
         }
         stage('SonarQube analysis') {
@@ -17,6 +22,11 @@ pipeline {
                 withSonarQubeEnv('SonarQube') {
                     sh 'mvn sonar:sonar'
                 }
+            }
+        }
+        stage('Third Party Audit'){
+            steps{
+                sh "mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:analyze-report license:add-third-party org.apache.maven.plugins:maven-dependency-plugin:2.10:tree -DoutputType=dot -DoutputFile=${WORKSPACE}/report//dependency-tree.dot"
             }
         }
     }
