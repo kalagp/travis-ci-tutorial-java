@@ -7,9 +7,14 @@ pipeline {
         jdk 'linux-jdk1.8.0_102'
     }
     stages {
-        stage('Verify') {
+        stage('Compile') {
             steps {
                 sh "mvn compile"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "mvn test"
             }
         }
         stage('SonarQube analysis') {
