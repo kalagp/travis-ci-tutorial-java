@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        builder-06
+        label 'builder-06'
         //        label 'maven-builder'
     }
     tools {
