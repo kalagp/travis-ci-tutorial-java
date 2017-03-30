@@ -10,7 +10,6 @@ pipeline {
         maven 'linux-maven-3.3.9'
         jdk 'linux-jdk1.8.0_102'
     }
-    ws("workspace/${env.JOB_NAME}"){
     stages {
         stage('Compile') {
             steps {
@@ -49,5 +48,5 @@ pipeline {
                 archiveArtifacts 'nexb-scancode/scancode_result_files/,**/scancode_result.html,**/minimal.html'
             }
         }
-    }}
+    }
 }
