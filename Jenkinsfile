@@ -1,7 +1,11 @@
 pipeline {
     agent {
-        label 'builder-06'
-        //        label 'maven-builder'
+        node{
+            ws('workspace/${env.JOB_NAME}'){
+                label 'builder-06'
+                //        label 'maven-builder'
+            }
+        }
     }
     tools {
         maven 'linux-maven-3.3.9'
