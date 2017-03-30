@@ -1,5 +1,4 @@
 pipeline {
-    ws("workspace/${env.JOB_NAME}") {
         agent {
             label 'builder-06'
             //        label 'maven-builder'
@@ -36,10 +35,8 @@ pipeline {
                 steps{
     //                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'nexb-scancode']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
     //                sh "mkdir nexb-scancode"
-                    dir('sample'){
-                        dir('nexb-scancode'){
-                            git "https://github.com/nexB/scancode-toolkit.git" 
-                        }
+                    dir('nexb-scancode'){
+                        git "https://github.com/nexB/scancode-toolkit.git" 
                     }
     //                sh "cd ${WORKSPACE}/nexb-scancode"  
                     sh "./nexb-scancode/scancode --help"
@@ -49,5 +46,4 @@ pipeline {
                 }
             }
         }
-    }
 }
