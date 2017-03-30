@@ -32,12 +32,13 @@ pipeline {
         }
         stage('NexB Scan'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'nexb-scancode']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
-                sh "cd ${WORKSPACE}/nexb-scancode"
+//                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'nexb-scancode']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
+                git "https://github.com/nexB/scancode-toolkit.git"
+                sh "cd ${WORKSPACE}/scancode-toolkit"
                 sh "./scancode --help"
-                sh "./scancode --format html-app /opt/jenkins/workspace/nexb-scan-test/SrcRepo/ scancode_result.html"
-                sh "./scancode --format html /opt/jenkins/workspace/nexb-scan-test/SrcRepo/ minimal.html"
-                archiveArtifacts 'nexb-scancode/scancode_result_files/,**/scancode_result.html,**/minimal.html'
+                sh "./scancode --format html-app ${WORKSPACE}/ scancode_result.html"
+                sh "./scancode --format html ${WORKSPACE}/ minimal.html"
+                archiveArtifacts 'scancode-toolkit/scancode_result_files/,**/scancode_result.html,**/minimal.html'
             }
         }
     }
