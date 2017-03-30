@@ -37,10 +37,10 @@ pipeline {
                 dir('nexb-scancode'){
                     git "https://github.com/nexB/scancode-toolkit.git" 
                 }
-                sh "cd ${WORKSPACE}/nexb-scancode"  
-                sh "./scancode --help"
-                sh "./scancode --format html-app ${WORKSPACE}/ scancode_result.html"
-                sh "./scancode --format html ${WORKSPACE}/ minimal.html"
+//                sh "cd ${WORKSPACE}/nexb-scancode"  
+                sh "./nexb-scancode/scancode --help"
+                sh "./nexb-scancode/scancode --format html-app ${WORKSPACE}/ scancode_result.html"
+                sh "./nexb-scancode/scancode --format html ${WORKSPACE}/ minimal.html"
                 archiveArtifacts 'nexb-scancode/scancode_result_files/,**/scancode_result.html,**/minimal.html'
             }
         }
