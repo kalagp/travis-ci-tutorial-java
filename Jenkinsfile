@@ -3,7 +3,7 @@ pipeline {
         node{
 //          label 'maven-builder'
             label 'builder-06'
-            customWorkspace 'workspace/${env.JOB_NAME}'
+            customWorkspace "workspace/${env.JOB_NAME}"
             }
     }
     tools {
