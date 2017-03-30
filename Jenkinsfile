@@ -1,6 +1,7 @@
 pipeline {
     agent {
-        label 'maven-builder'
+        builder-06
+        //        label 'maven-builder'
     }
     tools {
         maven 'linux-maven-3.3.9'
