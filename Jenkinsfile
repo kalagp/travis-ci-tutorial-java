@@ -37,6 +37,7 @@ pipeline {
                 sh "./scancode --help"
                 sh "./scancode --format html-app /opt/jenkins/workspace/nexb-scan-test/SrcRepo/ scancode_result.html"
                 sh "./scancode --format html /opt/jenkins/workspace/nexb-scan-test/SrcRepo/ minimal.html"
+                archiveArtifacts 'nexb-scancode/scancode_result_files/,**/scancode_result.html,**/minimal.html'
             }
         }
     }
