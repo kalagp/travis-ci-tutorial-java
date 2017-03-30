@@ -27,7 +27,7 @@ pipeline {
         stage('Third Party Audit'){
             steps{
                 sh "mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:analyze-report license:add-third-party org.apache.maven.plugins:maven-dependency-plugin:2.10:tree -DoutputType=dot -DoutputFile=${WORKSPACE}/report//dependency-tree.dot"
-                archiveArtifacts '${WORKSPACE}/target/*,${WORKSPACE}/report/*'
+                archiveArtifacts 'target/*,report/*'
             }
         }
         stage('NexB Scan'){
