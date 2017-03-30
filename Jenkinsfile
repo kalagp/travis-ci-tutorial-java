@@ -33,7 +33,7 @@ pipeline {
         stage('NexB Scan'){
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'nexb-scancode']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
-                sh "cd ${WORKSPACE}/nexb-scan-test/Scancode"
+                sh "cd ${WORKSPACE}/nexb-scancode"
                 sh "./scancode --help"
                 sh "./scancode --format html-app /opt/jenkins/workspace/nexb-scan-test/SrcRepo/ scancode_result.html"
                 sh "./scancode --format html /opt/jenkins/workspace/nexb-scan-test/SrcRepo/ minimal.html"
