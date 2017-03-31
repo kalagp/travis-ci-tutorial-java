@@ -18,7 +18,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh "echo This is just a sample deploy step!"
+                sh "mvn clean install"
+                sh "echo This is not deploying to any remote repository. Just for testing purpose."
             }
         }
         stage('Unit Tests') {
