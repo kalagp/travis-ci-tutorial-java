@@ -43,8 +43,8 @@ pipeline {
                 }
     //                sh "cd ${WORKSPACE}/nexb-scancode"  
                 sh "./nexb-scancode/scancode --help"
-                sh "./nexb-scancode/scancode --format html-app ${WORKSPACE}/ scancode_result.html"
-                sh "./nexb-scancode/scancode --format html ${WORKSPACE}/ minimal.html"
+                sh "./nexb-scancode/scancode --format html-app ${WORKSPACE}/src/ scancode_result.html"
+                sh "./nexb-scancode/scancode --format html ${WORKSPACE}/src/ minimal.html"
                 archiveArtifacts 'nexb-scancode/scancode_result_files/,**/scancode_result.html,**/minimal.html'
             }
         }
