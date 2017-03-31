@@ -16,9 +16,19 @@ pipeline {
                 sh "mvn compile"
             }
         }
-        stage('Test') {
+        stage('Deploy') {
+            steps {
+                sh "echo This is just a sample deploy step!"
+            }
+        }
+        stage('Unit Tests') {
             steps {
                 sh "mvn test"
+            }
+        }
+        stage('Integration Tests') {
+            steps {
+                sh "echo No Integration tests defined for this repo!"
             }
         }
         stage('SonarQube Analysis') {
