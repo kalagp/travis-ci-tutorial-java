@@ -54,5 +54,8 @@ pipeline {
                 archiveArtifacts 'nexb-scancode/scancode_result_files/,**/scancode_result.html,**/minimal.html'
             }
         }
+        stage('Copy Artifacts'){
+            step ([$class: 'CopyArtifact', projectName: 'nexb-scan-test', filter: 'output/concerto/*'])
+        }
     }
 }
