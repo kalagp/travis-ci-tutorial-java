@@ -55,7 +55,9 @@ pipeline {
             }
         }
         stage('Copy Artifacts'){
-            step ([$class: 'CopyArtifact', projectName: 'nexb-scan-test', filter: 'output/concerto/*'])
+            steps{
+                step([$class: 'CopyArtifact', projectName: 'nexb-scan-test', filter: 'output/concerto/*'])
+            }
         }
     }
 }
