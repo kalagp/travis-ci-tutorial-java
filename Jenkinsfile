@@ -65,7 +65,7 @@ pipeline {
         }
         stage('Github Release'){
             when{
-                env.BRANCH_NAME == "master"
+                branch "master"
             }
             steps{
                 sh "rm -f linux-amd64-github-release.tar.bz2"
