@@ -7,8 +7,7 @@ pipeline {
             }
     }
     environment {
-        GIT_CREDS = credentials('github-03')
-        GITHUB_TOKEN = credentials('github-02')
+        GITHUB_TOKEN = credentials('github-04')
     }
     tools {
         maven 'linux-maven-3.3.9'
