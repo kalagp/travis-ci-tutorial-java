@@ -66,19 +66,20 @@ pipeline {
         }
         stage('Github Release'){
             steps{
-            sh "wget https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2"
-            sh "tar -xvjf linux-amd64-github-release.tar.bz2"
-            sh "cp bin/linux/amd64/github-realease /usr/bin/"
-            sh '''
-                github-release release \
+                sh "rm -f linux-amd64-github-release.tar.bz2"
+                sh "wget https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2"
+                sh "tar -xvjf linux-amd64-github-release.tar.bz2"
+                sh "yes | cp bin/linux/amd64/github-release /usr/bin/"
+                sh '''
+                    github-release release \
                         --repo  travis-ci-tutorial-java\
                         --tag v0.0.1-${BUILD_ID} \
-                        --name "travis-ci-tutorial-java Release" \
-                        --description "travis-ci-tutorial-java Release"
-                github-release upload \
+                        --name "travis-ci-tutorial-java release" \
+                        --description "travis-ci-tutorial-java release"
+                    github-release upload \
                         --repo travis-ci-tutorial-java \
                         --tag v0.1.0-${BUILD_ID} \
-                        --name "travis-ci-tutorial-java Release" \
+                        --name "travis-ci-tutorial-java release" \
                         --file /opt/jenkins/workspace/gitorg-test-purna/travis-ci-tutorial-java/master/target/travis-ci-tutorial.jar"
             '''
             }
