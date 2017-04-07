@@ -82,7 +82,7 @@ pipeline {
                         --repo travis-ci-tutorial-java \
                         --tag v0.1.0-${BUILD_ID} \
                         --name "travis-ci-tutorial-java release" \
-                        --file /opt/jenkins/workspace/gitorg-test-purna/travis-ci-tutorial-java/master/target/travis-ci-tutorial.jar"
+                        --file /opt/jenkins/workspace/gitorg-test-purna/travis-ci-tutorial-java/master/target/travis-ci-tutorial.jar
             '''
             }
         }
