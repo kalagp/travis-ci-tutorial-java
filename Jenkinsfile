@@ -70,19 +70,15 @@ pipeline {
             sh "tar -xvjf linux-amd64-github-release.tar.bz2"
             sh "cp bin/linux/amd64/github-realease /usr/bin/"
             sh "github-release release \
-                        //--user chamap1 \
                         --repo  travis-ci-tutorial-java\
                         --tag v0.0.1-${BUILD_ID} \
                         --name "travis-ci-tutorial-java Release" \
-                        --description "travis-ci-tutorial-java Release" \
-                        //--security-token c758a1ca54aaeb2fdd1e55f9df5088f7411bd4ae \
+                        --description "travis-ci-tutorial-java Release"
                 "
             sh "github-release upload \
-                        //--user chamap1 \
                         --repo travis-ci-tutorial-java \
                         --tag v0.1.0-${BUILD_ID} \
                         --name "travis-ci-tutorial-java Release" \
-                        //--security-token c758a1ca54aaeb2fdd1e55f9df5088f7411bd4ae \
                         --file /opt/jenkins/workspace/gitorg-test-purna/travis-ci-tutorial-java/master/target/travis-ci-tutorial.jar
                 "
             }
