@@ -14,7 +14,6 @@ pipeline {
         maven 'linux-maven-3.3.9'
         jdk 'linux-jdk1.8.0_102'
     }
-    stages {
         stage('Compile') {
             steps {
                 sh "mvn compile"
@@ -87,5 +86,4 @@ pipeline {
                 }
             }
         }
-    }
 }
