@@ -14,6 +14,7 @@ pipeline {
         maven 'linux-maven-3.3.9'
         jdk 'linux-jdk1.8.0_102'
     }
+    stages {
         stage('Compile') {
             steps {
                 sh "mvn compile"
@@ -62,28 +63,30 @@ pipeline {
                 step([$class: 'CopyArtifact', projectName: 'nexb-scan-test', filter: 'output/concerto/*'])
             }
         }
-        if (env.BRANCH_NAME == "master"){
-            stage('Github Release'){
-                steps{
-                    sh "rm -f linux-amd64-github-release.tar.bz2"
-                    sh "wget https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2"
-                    sh "tar -xvjf linux-amd64-github-release.tar.bz2"
-                    sh "yes | cp bin/linux/amd64/github-release /usr/bin/"
-                    sh '''
-                        github-release release \
-                            --user chamap1 \
-                            --repo  travis-ci-tutorial-java \
-                            --tag v0.0.1-${BUILD_ID} \
-                            --name "travis-ci-tutorial-java release" \
-                            --description "travis-ci-tutorial-java release"
-                        github-release upload \
-                            --user chamap1 \
-                            --repo travis-ci-tutorial-java \
-                            --tag v0.0.1-${BUILD_ID} \
-                            --name "travis-ci-tutorial-java release" \
-                            --file /opt/jenkins/workspace/gitorg-test-purna/travis-ci-tutorial-java/master/target/travis-ci-tutorial.jar
-                '''
-                }
+        stage('Github Release'){
+            when{
+                env.BRANCH_NAME == "master"
+            }
+            steps{
+                sh "rm -f linux-amd64-github-release.tar.bz2"
+                sh "wget https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2"
+                sh "tar -xvjf linux-amd64-github-release.tar.bz2"
+                sh "yes | cp bin/linux/amd64/github-release /usr/bin/"
+                sh '''
+                    github-release release \
+                        --user chamap1 \
+                        --repo  travis-ci-tutorial-java \
+                        --tag v0.0.1-${BUILD_ID} \
+                        --name "travis-ci-tutorial-java release" \
+                        --description "travis-ci-tutorial-java release"
+                    github-release upload \
+                        --user chamap1 \
+                        --repo travis-ci-tutorial-java \
+                        --tag v0.0.1-${BUILD_ID} \
+                        --name "travis-ci-tutorial-java release" \
+                        --file /opt/jenkins/workspace/gitorg-test-purna/travis-ci-tutorial-java/master/target/travis-ci-tutorial.jar
+            '''
             }
         }
+    }
 }
