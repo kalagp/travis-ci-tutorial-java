@@ -72,11 +72,13 @@ pipeline {
                 sh "yes | cp bin/linux/amd64/github-release /usr/bin/"
                 sh '''
                     github-release release \
-                        --repo  travis-ci-tutorial-java\
+                        --user chamap1 \
+                        --repo  travis-ci-tutorial-java \
                         --tag v0.0.1-${BUILD_ID} \
                         --name "travis-ci-tutorial-java release" \
                         --description "travis-ci-tutorial-java release"
                     github-release upload \
+                        --user chamap1 \
                         --repo travis-ci-tutorial-java \
                         --tag v0.1.0-${BUILD_ID} \
                         --name "travis-ci-tutorial-java release" \
