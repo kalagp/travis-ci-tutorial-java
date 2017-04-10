@@ -52,10 +52,10 @@ pipeline {
         stage('NexB Scan'){
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'nexb-scancode']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
-                sh "./nexb-scancode/scancode --help"
-                sh "./nexb-scancode/scancode --format html-app ${WORKSPACE}/src/ scancode_result.html"
-                sh "./nexb-scancode/scancode --format html ${WORKSPACE}/src/ minimal.html"
-                archiveArtifacts 'nexb-scancode/scancode_result_files/,**/scancode_result.html,**/minimal.html'
+//                sh "./nexb-scancode/scancode --help"
+//                sh "./nexb-scancode/scancode --format html-app ${WORKSPACE}/src/ scancode_result.html"
+//                sh "./nexb-scancode/scancode --format html ${WORKSPACE}/src/ minimal.html"
+//                archiveArtifacts 'nexb-scancode/scancode_result_files/,**/scancode_result.html,**/minimal.html'
             }
         }
         stage('Copy Artifacts'){
@@ -65,7 +65,9 @@ pipeline {
         }
         stage('Github Release'){
             when{
-                branch "master"
+                expression{
+                    return env.BRANCH_NAME == 'master' || 'sample_branch'
+                }
             }
             steps{
                 sh "rm -f linux-amd64-github-release.tar.bz2"
@@ -75,10 +77,10 @@ pipeline {
                 sh '''
                     github-release release \
                         --user chamap1 \
-                        --repo  travis-ci-tutorial-java \
+                        --repo travis-ci-tutorial-java \
                         --tag v0.0.1-${BUILD_ID} \
-                        --name "travis-ci-tutorial-java release" \
-                        --description "travis-ci-tutorial-java release"
+                        --name "travis-ci-tutorial-java \
+                        --description "travis-ci-tutorial-java"
                     github-release upload \
                         --user chamap1 \
                         --repo travis-ci-tutorial-java \
