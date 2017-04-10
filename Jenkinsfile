@@ -65,7 +65,7 @@ pipeline {
         }
         stage('Github Release'){
             when{
-                branch "master"
+                branch "master", "sample_branch"
             }
             steps{
                 sh "rm -f linux-amd64-github-release.tar.bz2"
@@ -75,15 +75,15 @@ pipeline {
                 sh '''
                     github-release release \
                         --user chamap1 \
-                        --repo  ${env.JOB_NAME}.replaceAll("gitorg-test-purna/","").replaceAll("/master","") \
+                        --repo  travis-ci-tutorial-java \
                         --tag v0.0.1-${BUILD_ID} \
-                        --name "${env.JOB_NAME}.replaceAll("gitorg-test-purna/","").replaceAll("/master","")" \
-                        --description "${env.JOB_NAME}.replaceAll("gitorg-test-purna/","").replaceAll("/master","")"
+                        --name "travis-ci-tutorial-java \
+                        --description "travis-ci-tutorial-java"
                     github-release upload \
                         --user chamap1 \
-                        --repo ${env.JOB_NAME}.replaceAll("gitorg-test-purna/","").replaceAll("/master","") \
+                        --repo travis-ci-tutorial-java \
                         --tag v0.0.1-${BUILD_ID} \
-                        --name "${env.JOB_NAME}.replaceAll("gitorg-test-purna/","").replaceAll("/master","") release" \
+                        --name "travis-ci-tutorial-java release" \
                         --file /opt/jenkins/workspace/gitorg-test-purna/travis-ci-tutorial-java/master/target/travis-ci-tutorial.jar
             '''
             }
