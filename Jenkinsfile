@@ -18,7 +18,7 @@ pipeline {
         stage('Compile') {
             steps {
                 echo "${env.JOB_NAME}"
-                echo "${env.BUILD_DISPLAY_NAME}"
+                echo "$GIT_DIR"
                 sh "mvn compile"
             }
         }
