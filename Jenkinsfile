@@ -66,7 +66,7 @@ pipeline {
         stage('Github Release'){
             when{
                 expression{
-                    return ${env.BRANCH_NAME} == 'master' || 'sample_branch'
+                    return ${env.BRANCH_NAME} == 'master' || 'sample_branch' || False
                 }
             }
             steps{
