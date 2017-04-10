@@ -17,7 +17,6 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                echo env.BRANCH_NAME
                 sh "mvn compile"
             }
         }
@@ -67,7 +66,7 @@ pipeline {
         stage('Github Release'){
             when{
                 expression{
-                    return ${env.BRANCH_NAME} == 'master' || 'sample_branch' || False
+                    return env.BRANCH_NAME == 'master' || 'sample_branch'
                 }
             }
             steps{
