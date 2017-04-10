@@ -21,21 +21,9 @@ pipeline {
             }
         }
         stage('Deploy') {
-            try{
-                steps {
-                    sh "mvn clean install"
-                    sh "echo This is not deploying to any remote repository. Just for testing purpose."
-                }
-            }catch(error){
-                // failure email
-                echo "Pipeline job failed ${error}"
-                echo "Sending email ... "
-                emailext body: "Jenkins job failed for ${JOB_NAME} and the build url: ${BUILD_URL}",
-                        subject: "Jenkins Build failure on Job ${JOB_NAME}(${BUILD_NUMBER})",
-                        to: 'purna.chamala@vce.com',
-                        recipientProviders: [[$class: 'CulpritsRecipientProvider']]
-                echo "email is sent"
-                throw error('Error occured during pipeline process')
+            steps {
+                sh "mvn clean install"
+                sh "echo This is not deploying to any remote repository. Just for testing purpose."
             }
         }
         stage('Unit Tests') {
