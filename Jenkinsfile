@@ -79,7 +79,7 @@ pipeline {
                         --user chamap1 \
                         --repo travis-ci-tutorial-java \
                         --tag v0.0.1-${BUILD_ID}-${env.BRANCH_NAME} \
-                        --name "travis-ci-tutorial-java \
+                        --name "travis-ci-tutorial-java" \
                         --description "travis-ci-tutorial-java"
                     github-release upload \
                         --user chamap1 \
