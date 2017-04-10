@@ -17,8 +17,6 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                echo "${env.JOB_NAME}"
-                echo "$GIT_DIR"
                 sh "mvn compile"
             }
         }
@@ -77,15 +75,15 @@ pipeline {
                 sh '''
                     github-release release \
                         --user chamap1 \
-                        --repo  travis-ci-tutorial-java \
+                        --repo  ${env.JOB_NAME}.replaceAll("gitorg-test-purna/","").replaceAll("/master","") \
                         --tag v0.0.1-${BUILD_ID} \
-                        --name "travis-ci-tutorial-java release" \
-                        --description "travis-ci-tutorial-java release"
+                        --name "${env.JOB_NAME}.replaceAll("gitorg-test-purna/","").replaceAll("/master","")" \
+                        --description "${env.JOB_NAME}.replaceAll("gitorg-test-purna/","").replaceAll("/master","")"
                     github-release upload \
                         --user chamap1 \
-                        --repo travis-ci-tutorial-java \
+                        --repo ${env.JOB_NAME}.replaceAll("gitorg-test-purna/","").replaceAll("/master","") \
                         --tag v0.0.1-${BUILD_ID} \
-                        --name "travis-ci-tutorial-java release" \
+                        --name "${env.JOB_NAME}.replaceAll("gitorg-test-purna/","").replaceAll("/master","") release" \
                         --file /opt/jenkins/workspace/gitorg-test-purna/travis-ci-tutorial-java/master/target/travis-ci-tutorial.jar
             '''
             }
