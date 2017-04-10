@@ -14,8 +14,8 @@ pipeline {
         maven 'linux-maven-3.3.9'
         jdk 'linux-jdk1.8.0_102'
     }
-    try{
-        stages {
+    stages {
+        try{
             stage('Compile') {
                 steps {
                     sh "mvn compile"
@@ -78,8 +78,7 @@ pipeline {
                     sh "yes | cp bin/linux/amd64/github-release /usr/bin/"
                 }
             }
-        }
-    }catch(error){
+        }catch(error){
         // failure email
         echo "Pipeline job failed ${error}"
         echo "Sending email ... "
@@ -89,5 +88,6 @@ pipeline {
                 recipientProviders: [[$class: 'CulpritsRecipientProvider']]
         echo "email is sent"
         throw error('Error occured during pipeline process')
+        }
     }
 }
