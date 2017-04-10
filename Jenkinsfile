@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                echo ${env.BRANCH_NAME}
+                echo env.BRANCH_NAME
                 sh "mvn compile"
             }
         }
