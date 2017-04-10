@@ -80,7 +80,7 @@ pipeline {
     }
     post{
         always{
-            echo this has to run
+            emailext attachLog: true, body: 'This is a sample body', recipientProviders: [[$class: 'CulpritsRecipientProvider']], subject: 'Jenkins Job ', to: 'purna.chamala@vce.com'
         }
     }
 }
