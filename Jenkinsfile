@@ -45,7 +45,7 @@ pipeline {
         }
         stage('Third Party Audit'){
             steps{
-                  echo sample
+                  sh "echo skipping this"
 //                    sh "mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:analyze-report license:add-third-party org.apache.maven.plugins:maven-dependency-plugin:2.10:tree -DoutputType=dot -DoutputFile=${WORKSPACE}/report//dependency-tree.dot"
 //                    archiveArtifacts 'target/generated-sources/license/*,report/*'
             }
