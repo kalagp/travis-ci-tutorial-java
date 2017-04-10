@@ -17,7 +17,8 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                echo "${env.JOB_BASE_NAME}"
+                echo "${env.JOB_NAME}"
+                echo "${env.BUILD_DISPLAY_NAME}"
                 sh "mvn compile"
             }
         }
