@@ -77,9 +77,9 @@ pipeline {
                 sh '''
                     github-release release \
                         --user chamap1 \
-                        --repo  travis-ci-tutorial-java \
+                        --repo travis-ci-tutorial-java \
                         --tag v0.0.1-${BUILD_ID} \
-                        --name "travis-ci-tutorial-java \
+                        --name "travis-ci-tutorial-java" \
                         --description "travis-ci-tutorial-java"
                     github-release upload \
                         --user chamap1 \
