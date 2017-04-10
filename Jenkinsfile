@@ -66,7 +66,7 @@ pipeline {
         stage('Github Release'){
             when{
                 expression{
-                    return env.BRANCH_NAME == 'master' || 'sample_branch'
+                    return env.BRANCH_NAME == 'master' || 'sample_branch' || env.BRANCH_NAME ==~ /(release\/.*)/
                 }
             }
             steps{
@@ -78,15 +78,15 @@ pipeline {
                     github-release release \
                         --user chamap1 \
                         --repo travis-ci-tutorial-java \
-                        --tag v0.0.1-${BUILD_ID} \
+                        --tag v0.0.1-${BUILD_ID}_${BRANCH_NAME} \
                         --name "travis-ci-tutorial-java" \
                         --description "travis-ci-tutorial-java"
                     github-release upload \
                         --user chamap1 \
                         --repo travis-ci-tutorial-java \
-                        --tag v0.0.1-${BUILD_ID} \
+                        --tag v0.0.1-${BUILD_ID}_${BRANCH_NAME} \
                         --name "travis-ci-tutorial-java release" \
-                        --file /opt/jenkins/workspace/gitorg-test-purna/travis-ci-tutorial-java/master/target/travis-ci-tutorial.jar
+                        --file ${WORKSPACE}/target/travis-ci-tutorial.jar
             '''
             }
         }
