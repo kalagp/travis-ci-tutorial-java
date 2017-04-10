@@ -46,8 +46,9 @@ pipeline {
             }
             stage('Third Party Audit'){
                 steps{
-                    sh "mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:analyze-report license:add-third-party org.apache.maven.plugins:maven-dependency-plugin:2.10:tree -DoutputType=dot -DoutputFile=${WORKSPACE}/report//dependency-tree.dot"
-                    archiveArtifacts 'target/generated-sources/license/*,report/*'
+                      echo sample
+//                    sh "mvn org.apache.maven.plugins:maven-dependency-plugin:2.10:analyze-report license:add-third-party org.apache.maven.plugins:maven-dependency-plugin:2.10:tree -DoutputType=dot -DoutputFile=${WORKSPACE}/report//dependency-tree.dot"
+//                    archiveArtifacts 'target/generated-sources/license/*,report/*'
                 }
             }
             stage('NexB Scan'){
@@ -75,20 +76,6 @@ pipeline {
                     sh "wget https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2"
                     sh "tar -xvjf linux-amd64-github-release.tar.bz2"
                     sh "yes | cp bin/linux/amd64/github-release /usr/bin/"
-                    sh '''
-                        github-release release \
-                            --user chamap1 \
-                            --repo travis-ci-tutorial-java \
-                            --tag v0.0.1-${BUILD_ID}_${BRANCH_NAME} \
-                            --name "travis-ci-tutorial-java" \
-                            --description "travis-ci-tutorial-java"
-                        github-release upload \
-                            --user chamap1 \
-                            --repo travis-ci-tutorial-java \
-                            --tag v0.0.1-${BUILD_ID}_${BRANCH_NAME} \
-                            --name "travis-ci-tutorial-java release" \
-                            --file ${WORKSPACE}/target/travis-ci-tutorial.jar
-                '''
                 }
             }
         }
@@ -102,4 +89,5 @@ pipeline {
                 recipientProviders: [[$class: 'CulpritsRecipientProvider']]
         echo "email is sent"
         throw error('Error occured during pipeline process')
+    }
 }
