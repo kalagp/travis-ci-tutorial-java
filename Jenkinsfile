@@ -78,5 +78,9 @@ pipeline {
             }
         }
     }
-    echo completed
+    post{
+        always{
+            echo this has to run
+        }
+    }
 }
