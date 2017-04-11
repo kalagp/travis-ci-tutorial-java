@@ -98,7 +98,7 @@ pipeline {
     }
     post{
         always{
-            emailext attachLog: true, body: 'This is a sample body', recipientProviders: [[$class: 'CulpritsRecipientProvider']], subject: 'Jenkins Job ', to: 'purna.chamala@vce.com'
+            emailext attachLog: true, body: 'This is a sample body', recipientProviders: [[$class: 'CulpritsRecipientProvider']], subject: 'Jenkins Job (${env.JOB_NAME})(${BUILD_NUMBER})', to: 'purna.chamala@vce.com'
         }
         success{
             //steps to be performed
