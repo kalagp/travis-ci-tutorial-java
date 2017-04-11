@@ -21,11 +21,11 @@ pipeline {
 //        [$class: 'BuildBlockerProperty', blockLevel: <object of type hudson.plugins.buildblocker.BuildBlockerProperty.BlockLevel>, blockingJobs: 'root-parent', scanQueueFor: <object of type hudson.plugins.buildblocker.BuildBlockerProperty.QueueScanScope>, useBuildBlocker: true]
     }
     stages {
-        stage('Environment Setup') {
-            steps{
-                deleteDir()
-            }
-        }
+//        stage('Environment Setup') {
+//            steps{
+//                deleteDir()
+//            }
+//        }
         stage('Compile') {
             steps {
                 sh "mvn compile"
@@ -125,7 +125,7 @@ pipeline {
     }
     post{
         always{
-            emailext attachLog: true, body: 'This is a sample body', recipientProviders: [[$class: 'CulpritsRecipientProvider']], subject: 'Jenkins Job ${JOB_NAME}(${BUILD_NUMBER})', to: 'purna.chamala@vce.com'
+            step([$class: 'WsCleanup']    
         }
         success{
             //steps to be performed
