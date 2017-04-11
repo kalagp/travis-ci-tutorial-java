@@ -25,7 +25,7 @@ pipeline {
         stage('Compile') {
             steps {
                 script {
-                    properties([[$class: 'BuildBlockerProperty', blockLevel: <object of type hudson.plugins.buildblocker.BuildBlockerProperty.BlockLevel>, blockingJobs: 'root-parent', scanQueueFor: <object of type hudson.plugins.buildblocker.BuildBlockerProperty.QueueScanScope>, useBuildBlocker: true], [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false], pipelineTriggers([])])
+                    properties([[$class: 'BuildBlockerProperty', blockLevel: global, blockingJobs: 'root-parent', scanQueueFor: disabled, useBuildBlocker: true], [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false], pipelineTriggers([])])
                 }
                 sh "mvn compile"
             }
