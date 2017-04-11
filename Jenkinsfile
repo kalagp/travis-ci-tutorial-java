@@ -21,7 +21,7 @@ pipeline {
 //        [$class: 'BuildBlockerProperty', blockLevel: <object of type hudson.plugins.buildblocker.BuildBlockerProperty.BlockLevel>, blockingJobs: 'root-parent', scanQueueFor: <object of type hudson.plugins.buildblocker.BuildBlockerProperty.QueueScanScope>, useBuildBlocker: true]
     }
     stages {
-        stage {
+        stage('Environment Setup') {
             steps{
                 deleteDir()
             }
