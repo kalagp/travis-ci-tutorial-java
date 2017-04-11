@@ -14,6 +14,10 @@ pipeline {
         maven 'linux-maven-3.3.9'
         jdk 'linux-jdk1.8.0_102'
     }
+    options { 
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        timestamps()
+    }
     stages {
         stage('Compile') {
             steps {
@@ -81,6 +85,15 @@ pipeline {
     post{
         always{
             emailext attachLog: true, body: 'This is a sample body', recipientProviders: [[$class: 'CulpritsRecipientProvider']], subject: 'Jenkins Job ', to: 'purna.chamala@vce.com'
+        }
+        success{
+            //steps to be performed
+        }
+        failure{
+            //steps to be performed
+        }
+        unstable{
+            //steps to be performed
         }
     }
 }
