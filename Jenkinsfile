@@ -125,7 +125,7 @@ pipeline {
     }
     post{
         always{
-            step([$class: 'WsCleanup']    
+            step([$class: 'WsCleanup'])   
         }
         success{
             //steps to be performed
