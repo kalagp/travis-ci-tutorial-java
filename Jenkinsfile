@@ -65,7 +65,12 @@ pipeline {
         }
         stage('NexB Scan'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'nexb-scancode']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
+                checkout([$class: 'GitSCM', 
+                          branches: [[name: '*/master']], 
+                          doGenerateSubmoduleConfigurations: false, 
+                          extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'nexb-scancode']], 
+                          submoduleCfg: [], 
+                          userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
 //                sh "./nexb-scancode/scancode --help"
 //                sh "./nexb-scancode/scancode --format html-app ${WORKSPACE}/src/ scancode_result.html"
 //                sh "./nexb-scancode/scancode --format html ${WORKSPACE}/src/ minimal.html"
@@ -80,7 +85,7 @@ pipeline {
         stage('Github Release'){
             when{
                 expression{
-                    return env.BRANCH_NAME == 'master' || 'sample_branch' || env.BRANCH_NAME ==~ /(release\/.*)/
+                    return env.BRANCH_NAME ==~ /master|sample_branch|release\/.*/
                 }
             }
             steps{
