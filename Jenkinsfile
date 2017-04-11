@@ -1,4 +1,4 @@
-
+pipeline {
     agent {
         node{
 //          label 'maven-builder'
@@ -113,4 +113,4 @@
             sh "echo Do Nothing"
         }
     }
-
+}
