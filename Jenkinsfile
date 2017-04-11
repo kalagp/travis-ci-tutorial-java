@@ -1,3 +1,4 @@
+import hudson.model.*
 pipeline {
     agent {
         node{
