@@ -88,12 +88,15 @@ pipeline {
         }
         success{
             //steps to be performed
+            sh "echo Do Nothing"
         }
         failure{
             //steps to be performed
+            sh "echo Do Nothing"
         }
         unstable{
             //steps to be performed
+            sh "echo Do Nothing"
         }
     }
 }
