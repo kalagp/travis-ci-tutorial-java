@@ -1,4 +1,3 @@
-import hudson.model.*
 pipeline {
     agent {
         node{
@@ -24,9 +23,6 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                script {
-                    properties([[$class: 'BuildBlockerProperty', blockLevel: global, blockingJobs: 'root-parent', scanQueueFor: disabled, useBuildBlocker: true], [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false], pipelineTriggers([])])
-                }
                 sh "mvn compile"
             }
         }
@@ -71,12 +67,14 @@ pipeline {
         }
         stage('NexB Scan'){
             steps{
-                checkout([$class: 'GitSCM', 
-                          branches: [[name: '*/master']], 
-                          doGenerateSubmoduleConfigurations: false, 
-                          extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'nexb-scancode']], 
-                          submoduleCfg: [], 
-                          userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
+                dir('/opt') {
+                    checkout([$class: 'GitSCM', 
+                              branches: [[name: '*/master']], 
+                              doGenerateSubmoduleConfigurations: false, 
+                              extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'nexB-scancode']], 
+                              submoduleCfg: [], 
+                              userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
+                }
 //                sh "./nexb-scancode/scancode --help"
 //                sh "./nexb-scancode/scancode --format html-app ${WORKSPACE}/src/ scancode_result.html"
 //                sh "./nexb-scancode/scancode --format html ${WORKSPACE}/src/ minimal.html"
