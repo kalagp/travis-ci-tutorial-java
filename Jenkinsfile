@@ -95,10 +95,12 @@ pipeline {
                 }
             }
             steps{
-                sh "rm -f linux-amd64-github-release.tar.bz2"
-                sh "wget https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2"
-                sh "tar -xvjf linux-amd64-github-release.tar.bz2"
-                sh "yes | cp bin/linux/amd64/github-release /usr/bin/"
+                dir('/opt') {
+                    sh "rm -f linux-amd64-github-release.tar.bz2"
+                    sh "wget https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2"
+                    sh "tar -xvjf linux-amd64-github-release.tar.bz2"
+                    sh "yes | cp bin/linux/amd64/github-release /usr/bin/"
+                }
             }
         }
     }
