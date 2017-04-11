@@ -75,10 +75,12 @@ pipeline {
                               submoduleCfg: [], 
                               userRemoteConfigs: [[url: 'https://github.com/nexB/scancode-toolkit.git']]])
                 }
-//                sh "./nexb-scancode/scancode --help"
-//                sh "./nexb-scancode/scancode --format html-app ${WORKSPACE}/src/ scancode_result.html"
-//                sh "./nexb-scancode/scancode --format html ${WORKSPACE}/src/ minimal.html"
-//                archiveArtifacts 'nexb-scancode/scancode_result_files/,**/scancode_result.html,**/minimal.html'
+                dir('nexb-output'){
+                    sh "sh /opt/nexB-scancode/scancode --help"
+                    sh "sh /opt/nexB-scancode/scancode --format html-app ${WORKSPACE} nexb-output/scancode_result.html"
+                    sh "sh /opt/nexB-scancode/scancode --format html ${WORKSPACE} nexb-output/minimal.html"
+                }
+                archiveArtifacts '**/nexb-output/**'
             }
         }
         stage('Copy Artifacts'){
