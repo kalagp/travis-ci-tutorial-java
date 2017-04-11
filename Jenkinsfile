@@ -77,8 +77,8 @@ pipeline {
                 }
                 dir('nexb-output'){
                     sh "sh /opt/nexB-scancode/scancode --help"
-                    sh "sh /opt/nexB-scancode/scancode --format html-app ${WORKSPACE} nexb-output/scancode_result.html"
-                    sh "sh /opt/nexB-scancode/scancode --format html ${WORKSPACE} nexb-output/minimal.html"
+                    sh "sh /opt/nexB-scancode/scancode --format html-app ${WORKSPACE} scancode_result.html"
+                    sh "sh /opt/nexB-scancode/scancode --format html ${WORKSPACE} minimal.html"
                 }
                 archiveArtifacts '**/nexb-output/**'
             }
