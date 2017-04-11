@@ -24,7 +24,9 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                properties([[$class: 'BuildBlockerProperty', blockLevel: GLOBAL, blockingJobs: 'root-parent', scanQueueFor: DISABLED, useBuildBlocker: true], [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false], pipelineTriggers([])])
+                script {
+                    properties([[$class: 'BuildBlockerProperty', blockLevel: GLOBAL, blockingJobs: 'root-parent', scanQueueFor: DISABLED, useBuildBlocker: true], [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false], pipelineTriggers([])])
+                }
                 sh "mvn compile"
             }
         }
