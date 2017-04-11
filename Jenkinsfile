@@ -5,7 +5,6 @@ pipeline {
             label 'builder-06'
             customWorkspace "workspace/${env.JOB_NAME}"
             }
-        deleteDir(workspace/${env.JOB_NAME})
     }
     environment {
         //GIT_CREDS = credentials('github-04')
@@ -22,6 +21,11 @@ pipeline {
 //        [$class: 'BuildBlockerProperty', blockLevel: <object of type hudson.plugins.buildblocker.BuildBlockerProperty.BlockLevel>, blockingJobs: 'root-parent', scanQueueFor: <object of type hudson.plugins.buildblocker.BuildBlockerProperty.QueueScanScope>, useBuildBlocker: true]
     }
     stages {
+        stage {
+            steps{
+                deleteDir()
+            }
+        }
         stage('Compile') {
             steps {
                 sh "mvn compile"
