@@ -4,6 +4,7 @@ pipeline {
 //          label 'maven-builder'
             label 'builder-06'
             customWorkspace "workspace/${env.JOB_NAME}"
+            deleteDir()
             }
     }
     environment {
