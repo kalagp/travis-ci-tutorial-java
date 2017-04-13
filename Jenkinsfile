@@ -1,6 +1,6 @@
 properties([
     pipelineTriggers([
-      downstream(threshold: hudson.model.Result.SUCCESS, downstreamProjects: 'simple-build-for-pipeline-plugin')
+      upstream(threshold: hudson.model.Result.SUCCESS, upstreamProjects: 'simple-build-for-pipeline-plugin')
   ])
 ])
 pipeline {
@@ -33,6 +33,7 @@ pipeline {
 //        }
         stage('Compile') {
             steps {
+                build job: 'simple-build-for-pipeline-plugin'
                 sh "mvn compile"
             }
         }
