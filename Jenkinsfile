@@ -1,6 +1,6 @@
 properties([
     pipelineTriggers([
-      upstream(threshold: hudson.model.Result.SUCCESS, upstreamProjects: 'simple-build-for-pipeline-plugin')
+      downstream(threshold: hudson.model.Result.SUCCESS, downstreamProjects: 'simple-build-for-pipeline-plugin')
   ])
 ])
 pipeline {
@@ -87,10 +87,10 @@ pipeline {
                 }
                 dir('nexb-output'){
                     sh "sh /opt/nexB-scancode/scancode --help"
-                    sh "sh /opt/nexB-scancode/scancode --format html-app ${WORKSPACE} scancode_result.html"
-                    sh "sh /opt/nexB-scancode/scancode --format html ${WORKSPACE} minimal.html"
+//                    sh "sh /opt/nexB-scancode/scancode --format html-app ${WORKSPACE} scancode_result.html"
+//                    sh "sh /opt/nexB-scancode/scancode --format html ${WORKSPACE} minimal.html"
                 }
-                archiveArtifacts '**/nexb-output/**'
+//                archiveArtifacts '**/nexb-output/**'
             }
         }
         stage('Copy Artifacts'){
@@ -110,20 +110,20 @@ pipeline {
                     sh "wget https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2"
                     sh "tar -xvjf linux-amd64-github-release.tar.bz2"
                     sh "yes | cp bin/linux/amd64/github-release /usr/bin/"
-                    sh '''
-                        github-release release \
-                            --user chamap1 \
-                            --repo travis-ci-tutorial-java \
-                            --tag v0.0.1-${BRANCH_NAME}-${BUILD_ID} \
-                            --name "travis-ci-tutorial-java" \
-                            --description "travis-ci-tutorial-java release"
-                        github-release upload \
-                            --user chamap1 \
-                            --repo travis-ci-tutorial-java \
-                            --tag v0.0.1-${BRANCH_NAME}-${BUILD_ID} \
-                            --name "travis-ci-tutorial-java" \
-                            --file ${WORKSPACE}/target/travis-ci-tutorial.jar
-                    '''
+//                    sh '''
+//                        github-release release \
+//                            --user chamap1 \
+//                            --repo travis-ci-tutorial-java \
+//                            --tag v0.0.1-${BRANCH_NAME}-${BUILD_ID} \
+//                            --name "travis-ci-tutorial-java" \
+//                            --description "travis-ci-tutorial-java release"
+//                        github-release upload \
+//                            --user chamap1 \
+//                            --repo travis-ci-tutorial-java \
+//                            --tag v0.0.1-${BRANCH_NAME}-${BUILD_ID} \
+//                            --name "travis-ci-tutorial-java" \
+//                            --file ${WORKSPACE}/target/travis-ci-tutorial.jar
+//                    '''
                 }
             }
         }
