@@ -1,3 +1,8 @@
+properties([
+    pipelineTriggers([
+      upstream(threshold: hudson.model.Result.SUCCESS, upstreamProjects: 'simple-build-for-pipeline-plugin')
+  ])
+])
 pipeline {
     agent {
         node{
