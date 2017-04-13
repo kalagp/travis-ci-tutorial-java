@@ -1,6 +1,6 @@
 properties([
     pipelineTriggers([
-      upstream(threshold: hudson.model.Result.SUCCESS, upstreamProjects: 'simple-build-for-pipeline-plugin')
+      upstream(threshold: hudson.model.Result.SUCCESS, upstreamProjects: 'gitorg-test-purna/travis-ci-tutorial-java/master')
   ])
 ])
 pipeline {
