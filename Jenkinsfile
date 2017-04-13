@@ -33,7 +33,7 @@ pipeline {
 //        }
         stage('Compile') {
             steps {
-                build: 'gitorg-test-purna/simple-build-for-pipeline-plugin/master'
+                build  job:'gitorg-test-purna/simple-build-for-pipeline-plugin/master', wait: false
                 sh "mvn compile"
             }
         }
